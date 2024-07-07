@@ -68,6 +68,17 @@ class GameController extends Controller
             $game->getRow(2)->getSpace( 0 ) !== GameMark::None
         ) return true;
 
+        /* for ( $i = 0; $i <= $game::TTT_SIZE; $i++ ) {
+            for ( $j = 0; $j < $game::TTT_SIZE; $j++ ) {
+                if ( $game->getRow($i)->getSpace($j) === GameMark::None )
+                    break;
+                if ( $game->getRow($i)->getSpace($j) !== $game->getRow($i)->getSpace($j+1) )
+                    break;
+                if ( $j +1 == $game::TTT_SIZE )
+                    return true;
+            }
+        } */
+
         if (    // Check the first column
             $game->getColumn(0)->getSpace( 0 ) === $game->getColumn(0)->getSpace( 1 ) &&
             $game->getColumn(0)->getSpace( 0 ) === $game->getColumn(0)->getSpace( 2 ) &&
@@ -86,17 +97,46 @@ class GameController extends Controller
             $game->getColumn(2)->getSpace( 0 ) !== GameMark::None
         ) return true;
 
+        /* for ( $i = 0; $i <= $game::TTT_SIZE; $i++ ) {
+            for ( $j = 0; $j < $game::TTT_SIZE; $j++ ) {
+                if ( $game->getColumns($i)->getSpace($j) === GameMark::None )
+                    break;
+                if ( $game->getColumns($i)->getSpace($j) !== $game->getColumns($i)->getSpace($j+1) )
+                    break;
+                if ( $j +1 == $game::TTT_SIZE )
+                    return true;
+            }
+        } */
+
         if (    // Check the main diagonal
             $game->getMainDiagonal(0)->getSpace( 0 ) === $game->getMainDiagonal(0)->getSpace( 1 ) &&
             $game->getMainDiagonal(0)->getSpace( 0 ) === $game->getMainDiagonal(0)->getSpace( 2 ) &&
             $game->getMainDiagonal(0)->getSpace( 0 ) !== GameMark::None
         ) return true;
 
+        /* for ( $i = 0; $i < $game::TTT_SIZE; $i++ ) {
+            if ( $game->getMainDiagonal(0)->getSpace($i) === GameMark::None )
+                break;
+            if ( $game->getMainDiagonal(0)->getSpace($i) !== $game->getMainDiagonal(0)->getSpace($i+1) )
+                break;
+            if ( $i +1 == $game::TTT_SIZE )
+                return true;
+        }  */
+
         if (    // Check the anti-diagonal
             $game->getAntiDiagonal(0)->getSpace( 0 ) === $game->getAntiDiagonal(0)->getSpace( 1 ) &&
             $game->getAntiDiagonal(0)->getSpace( 0 ) === $game->getAntiDiagonal(0)->getSpace( 2 ) &&
             $game->getAntiDiagonal(0)->getSpace( 0 ) !== GameMark::None
         ) return true;
+
+        /* for ( $i = 0; $i < $game::TTT_SIZE; $i++ ) {
+            if ( $game->getAntiDiagonal(0)->getSpace($i) === GameMark::None )
+                break;
+            if ( $game->getAntiDiagonal(0)->getSpace($i) !== $game->getAntiDiagonal(0)->getSpace($i+1) )
+                break;
+            if ( $i +1 == $game::TTT_SIZE )
+                return true;
+        } */
 
         return false;
     }
